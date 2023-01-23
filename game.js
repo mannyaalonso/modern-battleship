@@ -269,7 +269,8 @@ function buttonClicked(e) {
       checkPosition(mySubmarine, submarineColor, userPositions, "user-")
     }
   }
-  
+
+  /*---------------CLEAR POSITIONS---------------*/
   const clearPosition = Object.keys(userPositions)
   if (e.target.innerText == "Start Game") {
     if (clearPosition.length === 19) {
@@ -277,7 +278,7 @@ function buttonClicked(e) {
       startGame()
       console.log(readyToPlay)
     } else {
-      console.log('Please set all your ships')
+      console.log("Please set all your ships")
     }
   }
 
@@ -287,6 +288,7 @@ function buttonClicked(e) {
     startGameBtn.style.backgroundColor = "grey"
   }
 
+  /*---------------RESET GAME---------------*/
   if (e.target.innerText == "Play Again") {
     enemyPositions = {}
     userPositions = {}
