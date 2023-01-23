@@ -99,12 +99,12 @@ body {
 .user-btn {
   background-color: black;
   color: white;
+  cursor: pointer;
 }
 
 .ships:hover {
   background-color: crimson;
   color: white;
-  cursor: pointer;
 }
 
 .enemy:hover {
@@ -130,6 +130,11 @@ body {
   font-size: 20px;
   margin-bottom: 0;
 }
+
+#start-game {
+  background-color: grey;
+}
+
 
 /*
 Waves from:
