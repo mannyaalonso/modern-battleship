@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="index.css" />
-  <title>Modern Battleship</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./Ships/Carrier.js" type="module" defer></script>
+    <script src="./Ships/Battleship.js" type="module" defer></script>
+    <script src="./Ships/Cruiser.js" type="module" defer></script>
+    <script src="./Ships/Destroyer.js" type="module" defer></script>
+    <script src="./Ships/Submarine.js" type="module" defer></script>
+    <script src="game.js" type="module" defer></script>
+    <link rel="stylesheet" href="index.css" />
+    <title>Modern BattleShip</title>
+  </head>
 
-<!--Hey! This is the original version
+  <!--Hey! This is the original version
 of Simple CSS Waves-->
 
   <div class="header">
@@ -43,11 +49,7 @@ c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3
           />
         </g>
       </svg>
-      <div class="home-page">
-        <h1>Modern Battleship</h1>
-        <a href="./game.html"><p class="p-text">Click to Enter</p></a>
-      </div>
-      
+      <h1>Modern BattleShip</h1>
     </div>
 
     <!--Waves Container-->
@@ -96,7 +98,23 @@ c-22.4,3-38.4,9.2-47.8,18.3c-11.2,10.9-13.6,26.7-16.3,45c-3.1,20.8-6.6,44.4-25.3
   <!--Content starts-->
   <div class="content flex">
     <body>
-     
+      <div class="parent-container">
+        <div class="container">
+          <h1 class="board-titles">Enemy's Board</h1>
+          <div class="board" id="attackBoard"></div>
+          <div class="enemy-buttons"></div>
+        </div>
+        <div class="dash">
+          <h1 id="dash-title">Welcome</h1>
+          <p id="dash-text">Click on <span>each button</span> below <span>'Your Board'</span> to place each ship. -></p>
+          <button class="user-btn ships" id="start-game">Start Game</button>
+        </div>
+        <div class="container">
+          <h1 class="board-titles">Your Board</h1>
+          <div class="board" id="playerBoard"></div>
+          <div class="user-buttons"></div>
+        </div>
+      </div>
     </body>
   </div>
   <!--Content ends-->
