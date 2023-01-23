@@ -34,11 +34,7 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  background: linear-gradient(
-    60deg,
-    #011f4b 0%,
-    #b3cde0 100%
-  );
+  background: linear-gradient(60deg, #011f4b 0%, #b3cde0 100%);
 }
 #dash-title {
   font-family: "Lato", sans-serif;
@@ -50,6 +46,7 @@ body {
   color: white;
   margin: 20px 20px;
 }
+
 
 .board {
   margin: 20px 20px;
@@ -78,26 +75,12 @@ body {
   color: black;
 }
 
-.user-buttons {
-  margin: 5px 0 50px 0;
-  width: 484px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  cursor: pointer;
+.enemy:hover {
+  background-color: #011f4b;
+  color: white;
 }
 
-.enemy-buttons {
-  margin: 5px 0 50px 0;
-  width: 484px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
-
-.ships {
+.user-btns {
   width: 90px;
   height: 30px;
   border: none;
@@ -106,25 +89,13 @@ body {
   border-radius: 5px;
 }
 
-.enemy-btn {
-  background-color: black;
-  color: white;
-}
-
-.user-btn {
-  background-color: black;
-  color: white;
-  cursor: pointer;
-}
-
-.ships:hover {
+.user-btns:hover {
   background-color: crimson;
   color: white;
 }
 
-.enemy:hover {
-  background-color: #011f4b;
-  cursor: pointer;
+#start-game:hover {
+  background-color: crimson;
   color: white;
 }
 
@@ -136,8 +107,10 @@ body {
 }
 
 #start-game {
-  background-color: grey;
+  background-color: black;
 }
+
+
 
 span {
   font-weight: 1000;
@@ -164,7 +137,6 @@ a {
   text-decoration: underline;
 }
 
-
 /*
 Waves from:
 https://codepen.io/goodkatz/pen/LYPGxQz?editors=0100
@@ -187,11 +159,7 @@ p {
 .header {
   position: relative;
   text-align: center;
-  background: linear-gradient(
-    60deg,
-    #011f4b 0%,
-    #b3cde0 100%
-  );
+  background: linear-gradient(60deg, #011f4b 0%, #b3cde0 100%);
   color: white;
 }
 

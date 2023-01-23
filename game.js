@@ -19,13 +19,14 @@ const enemyDestroyer = new Destroyer()
 const enemySubmarine = new Submarine()
 
 /*---------------USER BUTTONS---------------*/
-const buttons = document.querySelector('.user-buttons')
+const buttons = document.querySelector(".user-buttons")
 const myBattleShipBtn = document.createElement("button")
 const myCarrierBtn = document.createElement("button")
 const myCruiserBtn = document.createElement("button")
 const myDestoryerBtn = document.createElement("button")
 const mySubmarineBtn = document.createElement("button")
 const startGameBtn = document.querySelector("#start-game")
+const randomizeBtn = document.querySelector("#randomize")
 
 /*---------------USER TEXTS---------------*/
 const dashTitle = document.getElementById("dash-title")
@@ -68,8 +69,8 @@ let topCounter = 0
 /*---------------INIT---------------*/
 createAttackBoard()
 createPlayerBoard()
-createButtons()
 createButtonListeners()
+startGameBtn.style.display = "none"
 
 /*---------------ATTACK BOARD---------------*/
 function createAttackBoard() {
@@ -123,7 +124,6 @@ function createPlayerBoard() {
     //ADD INITIAL ATTRIBUTES
     const div = document.createElement("div")
     div.setAttribute("class", "user cells")
-    //div.addEventListener('click', clickedBoard)
 
     //ASSING ID'S BY ROW
     if (i > 11 && i < 22) div.setAttribute("id", `user-A${i % 11}`)
@@ -160,36 +160,10 @@ function createPlayerBoard() {
   topCounter = 0
 }
 
-function createButtons() {
-  myBattleShipBtn.setAttribute("class", "user-btn ships")
-  myCarrierBtn.setAttribute("class", "user-btn ships")
-  myCruiserBtn.setAttribute("class", "user-btn ships")
-  myDestoryerBtn.setAttribute('class', 'user-btn ships')
-  mySubmarineBtn.setAttribute("class", "user-btn ships")
-
-  myBattleShipBtn.setAttribute("id", "user-0")
-  myCarrierBtn.setAttribute("id", "user-1")
-  myCruiserBtn.setAttribute("id", "user-2")
-  myDestoryerBtn.setAttribute("id", "user-3")
-  mySubmarineBtn.setAttribute("id", "user-4")
-  
-  myBattleShipBtn.innerText = 'Battleship'
-  myCarrierBtn.innerText = "Carrier"
-  myCruiserBtn.innerText = "Cruiser"
-  myDestoryerBtn.innerText = "Destroyer"
-  mySubmarineBtn.innerText = "Submarine"
-
-  buttons.appendChild(myBattleShipBtn)
-  buttons.appendChild(myCarrierBtn)
-  buttons.appendChild(myCruiserBtn)
-  buttons.appendChild(myDestoryerBtn)
-  buttons.appendChild(mySubmarineBtn)
-}
-
 /*---------------CREATE BUTTON LISTENERS---------------*/
 function createButtonListeners() {
-  const ships = document.querySelectorAll(".ships")
-  ships.forEach((ship) => ship.addEventListener("click", buttonClicked))
+  const btns = document.querySelectorAll(".user-btns")
+  btns.forEach((btn) => btn.addEventListener("click", buttonClicked))
 }
 
 /*---------------CLICK TARGET---------------*/
@@ -210,10 +184,10 @@ function clickedEnemyBoard(e) {
     enemyCheck = Object.keys(enemyHits)
     if (userCheck.length == 19) {
       readyToPlay = false
-      userWon('User')
+      userWon("User")
     } else if (enemyCheck.length == 19) {
       readyToPlay = false
-      userWon('Enemy')
+      userWon("Enemy")
     }
   }
 }
@@ -230,7 +204,7 @@ function AiTurn() {
       if (userPositions[`${randomLeft}${randomTop}`] == true) {
         enemyHits[`${randomLeft}${randomTop}`] = true
         cell.style.backgroundColor = "crimson"
-      } 
+      }
       break
     }
   }
@@ -238,54 +212,45 @@ function AiTurn() {
 
 /*---------------SOMEONE WON---------------*/
 function userWon(player) {
-  if (player == 'User') {
+  if (player == "User") {
     dashTitle.innerText = `You won!`
     dashText.innerText = "You've destroyed all your enemies ships!"
-    startGameBtn.innerText = "Play Again"
   } else {
     dashTitle.innerText = `You lost!`
     dashText.innerText = "Wars are meant to be fought, not won"
-    startGameBtn.innerText = "Play Again"
   }
+  startGameBtn.innerText = "Play Again"
+  startGameBtn.style.display = "inline"
 }
 
 /*---------------BUTTONS TO SET USER SHIPS---------------*/
 function buttonClicked(e) {
   if (readyToPlay == false) {
-    if (e.target.id == "user-0") {
+    if (e.target.id == "randomize") {
       clearPositions(0)
       checkPosition(myBattleShip, battleShipColor, userPositions, "user-")
-    } else if (e.target.id == "user-1") {
-      clearPositions(4)
       checkPosition(myCarrier, carrierColor, userPositions, "user-")
-    } else if (e.target.id == "user-2") {
-      clearPositions(9)
       checkPosition(myCruiser, cruiserColor, userPositions, "user-")
-    } else if (e.target.id == "user-3") {
-      clearPositions(11)
       checkPosition(myDestroyer, destroyerColor, userPositions, "user-")
-    } else if (e.target.id == "user-4") {
-      clearPositions(16)
       checkPosition(mySubmarine, submarineColor, userPositions, "user-")
     }
-  }
 
-  /*---------------CLEAR POSITIONS---------------*/
-  const clearPosition = Object.keys(userPositions)
-  if (e.target.innerText == "Start Game") {
-    if (clearPosition.length === 19) {
-      readyToPlay = true
-      startGame()
-      console.log(readyToPlay)
-    } else {
-      console.log("Please set all your ships")
+    /*---------------CLEAR POSITIONS---------------*/
+    const userPositionsArr = Object.keys(userPositions)
+    if (e.target.innerText == "Start Game") {
+      if (userPositionsArr.length === 19) {
+        readyToPlay = true
+        return startGame()
+      }
     }
-  }
 
-  if (clearPosition.length === 19) {
-    startGameBtn.style.backgroundColor = "black"
-  } else if (clearPosition.length < 19) {
-    startGameBtn.style.backgroundColor = "grey"
+    /*---------------UPDATE BUTTONS---------------*/
+    if (userPositionsArr.length === 19) {
+      startGameBtn.style.display = "inline"
+      dashText.innerText = "Click Start Game to begin!"
+    } else if (userPositionsArr.length < 19) {
+      startGameBtn.style.backgroundColor = "grey"
+    }
   }
 
   /*---------------RESET GAME---------------*/
@@ -304,12 +269,12 @@ function buttonClicked(e) {
     attackBoard.replaceChildren()
     createAttackBoard()
     createPlayerBoard()
-    createButtons()
     dashTitle.innerText = `Weclome`
     dashText.innerHTML =
       "Click on <span>each button</span> below <span>'Your Board'</span> to place each ship. ->"
     startGameBtn.innerText = "Start Game"
-    startGameBtn.style.backgroundColor = "grey"
+    startGameBtn.style.display = "none"
+    randomizeBtn.style.display = "inline"
   }
 }
 
@@ -319,17 +284,17 @@ function clearPositions(index) {
   for (let i = index; i < clearPosition.length; i++) {
     delete userPositions[clearPosition[i]]
     const cell = document.querySelector(`#user-${clearPosition[i]}`)
-    cell.style.backgroundColor = 'transparent'
-    cell.style.border = '1px solid black'
+    cell.style.backgroundColor = "transparent"
+    cell.style.border = "1px solid black"
   }
 }
 
 /*---------------START GAME---------------*/
 function startGame() {
-  buttons.replaceChildren()
   dashTitle.innerText = "You vs Computer"
-  dashText.innerText = "<- Click and destroy all 5 ships to win the war!"
-  startGameBtn.innerText = "Game Started"
+  dashText.innerHTML = "<- Click and destroy all 5 ships to win the war!"
+  startGameBtn.style.display = "none"
+  randomizeBtn.style.display = "none"
 }
 
 /*---------------CALL TO PLACE ENEMIES---------------*/
@@ -363,7 +328,6 @@ function assignPosition(shipPosition, color, position, side) {
     if (position !== enemyPositions) {
       const cell = document.querySelector(`#${side}${shipPosition[i]}`)
       cell.style.backgroundColor = color
-      cell.style.border = '1px dotted blue'
     }
   }
 }
