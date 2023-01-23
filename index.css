@@ -113,11 +113,6 @@ body {
   color: white;
 }
 
-.user:hover {
-  background-color: rgba(0, 172, 193, 1);
-  color: white;
-}
-
 .dash-content {
   font-family: "Lato", sans-serif;
   font-weight: 300;
