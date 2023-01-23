@@ -156,6 +156,10 @@ a {
   color: white;
 }
 
+.h-text {
+  margin-top: 80px;
+}
+
 .p-text:hover {
   text-decoration: underline;
 }
