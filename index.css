@@ -26,7 +26,7 @@ body {
 
 .dash {
   height: 520px;
-  min-width: 200px;
+  min-width: 350px;
   color: white;
   margin: 0 20px;
   display: flex;
@@ -40,8 +40,13 @@ body {
     rgba(0, 172, 193, 1) 100%
   );
 }
+#dash-title {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  font-size: 30px;
+}
 
-.dash-text {
+#dash-text {
   color: white;
   margin: 20px 20px;
 }
@@ -111,12 +116,6 @@ body {
   background-color: rgba(84, 58, 183, 1);
   cursor: pointer;
   color: white;
-}
-
-.dash-content {
-  font-family: "Lato", sans-serif;
-  font-weight: 300;
-  font-size: 30px;
 }
 
 .board-titles {

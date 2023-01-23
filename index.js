@@ -19,16 +19,15 @@ const enemyDestroyer = new Destroyer()
 const enemySubmarine = new Submarine()
 
 /*---------------USER BUTTONS---------------*/
-const buttons = []
-for (let i = 0; i < 5; i++) {
-  buttons.push(document.getElementById(`user-${i}`))
-}
 const myBattleShipBtn = document.getElementById("user-0")
 const myCarrierBtn = document.getElementById("user-1")
 const myCruiserBtn = document.getElementById("user-2")
 const myDestoryerBtn = document.getElementById("user-3")
 const mySubmarineBtn = document.getElementById("user-4")
 const startGameBtn = document.querySelector("#start-game")
+
+const dashTitle = document.getElementById("dash-title")
+const dashText = document.getElementById("dash-text")
 
 /*---------------COLORS---------------*/
 const battleShipColor = "pink"
@@ -45,18 +44,16 @@ myDestoryerBtn.style.backgroundColor = destroyerColor
 mySubmarineBtn.style.backgroundColor = submarineColor
 
 /*---------------GAME VARIABLES---------------*/
-const enemyPositions = {}
-const userPositions = {}
-const enemyGuesses = {}
-const userGuesses = {}
-const enemyHits = {}
-const userHits = {}
+let enemyPositions = {}
+let userPositions = {}
+let enemyGuesses = {}
+let userGuesses = {}
+let enemyHits = {}
+let userHits = {}
 let userCheck = []
 let enemyCheck = []
 let match = false
 let readyToPlay = false
-let userTurn = true
-let aiHit = false
 
 /*---------------CREATE 10x10 BOARD---------------*/
 const attackBoard = document.querySelector("#attackBoard")
@@ -192,6 +189,7 @@ function clickedEnemyBoard(e) {
   }
 }
 
+/*---------------AI FUNCTIONALITY---------------*/
 function AiTurn() {
   while (true) {
     const randomLeft = leftSide[Math.floor(Math.random() * 10)]
@@ -210,7 +208,15 @@ function AiTurn() {
 }
 
 function userWon(player) {
-  console.log(`${player} won!`)
+  if (player == 'User') {
+    dashTitle.innerText = `You won!`
+    dashText.innerText = "You've destroyed all your enemies ships!"
+    startGameBtn.innerText = "Play Again"
+  } else {
+    dashTitle.innerText = `You lost!`
+    dashText.innerText = "Wars are meant to be fought, not won"
+    startGameBtn.innerText = "Play Again"
+  }
 }
 
 /*---------------SHOW HEALTH---------------*/
@@ -236,6 +242,7 @@ function hideHealth(e) {
   if (e.target.id == "enemy-4") e.target.textContent = `${enemySubmarine.name}`
 }
 
+/*---------------BUTTONS TO SET USER SHIPS---------------*/
 function buttonClicked(e) {
   if (readyToPlay == false) {
     if (e.target.id == "user-0") {
@@ -257,7 +264,7 @@ function buttonClicked(e) {
   }
   
   const clearPosition = Object.keys(userPositions)
-  if (e.target.id == "start-game") {
+  if (e.target.innerText == "Start Game") {
     if (clearPosition.length === 19) {
       readyToPlay = true
       startGame()
@@ -272,8 +279,30 @@ function buttonClicked(e) {
   } else if (clearPosition.length < 19) {
     startGameBtn.style.backgroundColor = "grey"
   }
+
+  if (e.target.innerText == "Play Again") {
+    enemyPositions = {}
+    userPositions = {}
+    enemyGuesses = {}
+    userGuesses = {}
+    enemyHits = {}
+    userHits = {}
+    userCheck = []
+    enemyCheck = []
+    match = false
+    readyToPlay = false
+    playerBoard.replaceChildren()
+    attackBoard.replaceChildren()
+    createAttackBoard()
+    createPlayerBoard()
+    dashTitle.innerText = `Weclome`
+    dashText.innerHTML =
+      "Click on <span>each button</span> on the right to place each ship. ->"
+    startGameBtn.innerText = "Start Game"
+  }
 }
 
+/*---------------CLEAR USER POSITIONS---------------*/
 function clearPositions(index) {
   const clearPosition = Object.keys(userPositions)
   for (let i = index; i < clearPosition.length; i++) {
@@ -284,8 +313,11 @@ function clearPositions(index) {
   }
 }
 
+/*---------------START GAME---------------*/
 function startGame() {
-  
+  dashTitle.innerText = "You vs Computer"
+  dashText.innerText = "<- Click and destroy all 5 ships to win the war!"
+  startGameBtn.innerText = "Game Started"
 }
 
 
