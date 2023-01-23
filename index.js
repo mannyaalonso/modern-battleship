@@ -30,21 +30,20 @@ const myDestoryerBtn = document.getElementById("user-3")
 const mySubmarineBtn = document.getElementById("user-4")
 
 /*---------------COLORS---------------*/
-const battleShipColor = "lightgrey"
-const carrierColor = "lightgrey"
-const cruiserColor = "lightgrey"
-const destroyerColor = "lightgrey"
-const submarineColor = "lightgrey"
+const battleShipColor = "pink"
+const carrierColor = "blue"
+const cruiserColor = "red"
+const destroyerColor = "navy"
+const submarineColor = "springgreen"
 
 /*---------------BUTTON COLORS---------------*/
-// myBattleShipBtn.style.backgroundColor = battleShipColor
-// myCarrierBtn.style.backgroundColor = carrierColor
-// myCruiserBtn.style.backgroundColor = cruiserColor
-// myDestoryerBtn.style.backgroundColor = destroyerColor
-// mySubmarineBtn.style.backgroundColor = submarineColor
+myBattleShipBtn.style.backgroundColor = battleShipColor
+myCarrierBtn.style.backgroundColor = carrierColor
+myCruiserBtn.style.backgroundColor = cruiserColor
+myDestoryerBtn.style.backgroundColor = destroyerColor
+mySubmarineBtn.style.backgroundColor = submarineColor
 
 /*---------------GAME VARIABLES---------------*/
-
 const enemyPositions = {}
 const userPositions = {}
 const enemyGuesses = {}
@@ -53,6 +52,7 @@ const enemyHits = {}
 const userHits = {}
 let winCheck = []
 let match = false
+let readyToPlay = false
 
 /*---------------CREATE 10x10 BOARD---------------*/
 const attackBoard = document.querySelector("#attackBoard")
@@ -164,18 +164,20 @@ function createButtonListeners() {
 
 /*---------------CLICK TARGET---------------*/
 function clickedEnemyBoard(e) {
-  const cell = document.querySelector(`#${e.target.id}`)
-  userGuesses[e.target.id] = true
-  if (enemyPositions[e.target.id] && !userHits[e.target.id]) {
-    userHits[e.target.id] = true
-    cell.style.backgroundColor = "crimson"
-    cell.removeEventListener("click", clickedEnemyBoard)
-    winCheck = Object.keys(userHits)
-  } else {
-    cell.style.backgroundColor = "rgba(84, 58, 183, 1)"
-    cell.removeEventListener("click", clickedEnemyBoard)
+  if (readyToPlay == true) {
+    const cell = document.querySelector(`#${e.target.id}`)
+    userGuesses[e.target.id] = true
+    if (enemyPositions[e.target.id] && !userHits[e.target.id]) {
+      userHits[e.target.id] = true
+      cell.style.backgroundColor = "crimson"
+      cell.removeEventListener("click", clickedEnemyBoard)
+      winCheck = Object.keys(userHits)
+    } else {
+      cell.style.backgroundColor = "rgba(84, 58, 183, 1)"
+      cell.removeEventListener("click", clickedEnemyBoard)
+    }
+    if (winCheck.length == 19) return userWon()
   }
-  if (winCheck.length == 19) return userWon()
 }
 
 function userWon() {
@@ -206,30 +208,38 @@ function hideHealth(e) {
 }
 
 function buttonClicked(e) {
-  if (e.target.id == "user-0") {
-    clearPositions(0)
-    checkPosition(myBattleShip, battleShipColor, userPositions, "user-")
-  } else if (e.target.id == "user-1") {
-    clearPositions(4)
-    checkPosition(myCarrier, carrierColor, userPositions, "user-")
-  } else if (e.target.id == "user-2") {
-    clearPositions(9)
-    checkPosition(myCruiser, cruiserColor, userPositions, "user-")
-  } else if (e.target.id == "user-3") {
-    clearPositions(11)
-    checkPosition(myDestroyer, destroyerColor, userPositions, "user-")
-  } else if (e.target.id == "user-4") {
-    clearPositions(16)
-    checkPosition(mySubmarine, submarineColor, userPositions, "user-")
+  if (readyToPlay == false) {
+    if (e.target.id == "user-0") {
+      clearPositions(0)
+      checkPosition(myBattleShip, battleShipColor, userPositions, "user-")
+    } else if (e.target.id == "user-1") {
+      clearPositions(4)
+      checkPosition(myCarrier, carrierColor, userPositions, "user-")
+    } else if (e.target.id == "user-2") {
+      clearPositions(9)
+      checkPosition(myCruiser, cruiserColor, userPositions, "user-")
+    } else if (e.target.id == "user-3") {
+      clearPositions(11)
+      checkPosition(myDestroyer, destroyerColor, userPositions, "user-")
+    } else if (e.target.id == "user-4") {
+      clearPositions(16)
+      checkPosition(mySubmarine, submarineColor, userPositions, "user-")
+    }
   }
   
   if (e.target.id == "start-game") {
     const clearPositions = Object.keys(userPositions)
     if (clearPositions.length === 19) {
+
       console.log('Ready to start game')
+      readyToPlay = true
     } else {
       console.log('Please set all your ships')
     }
+  }
+
+  if (readyToPlay) {
+    
   }
 }
 
@@ -239,7 +249,6 @@ function clearPositions(index) {
     delete userPositions[clearPositions[i]]
     const cell = document.querySelector(`#user-${clearPositions[i]}`)
     cell.style.backgroundColor = 'transparent'
-    //cell.style.
   }
 }
 
