@@ -236,6 +236,7 @@ function AiTurn() {
   }
 }
 
+/*---------------SOMEONE WON---------------*/
 function userWon(player) {
   if (player == 'User') {
     dashTitle.innerText = `You won!`
