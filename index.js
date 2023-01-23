@@ -28,6 +28,7 @@ const myCarrierBtn = document.getElementById("user-1")
 const myCruiserBtn = document.getElementById("user-2")
 const myDestoryerBtn = document.getElementById("user-3")
 const mySubmarineBtn = document.getElementById("user-4")
+const startGameBtn = document.querySelector("#start-game")
 
 /*---------------COLORS---------------*/
 const battleShipColor = "pink"
@@ -50,9 +51,12 @@ const enemyGuesses = {}
 const userGuesses = {}
 const enemyHits = {}
 const userHits = {}
-let winCheck = []
+let userCheck = []
+let enemyCheck = []
 let match = false
 let readyToPlay = false
+let userTurn = true
+let aiHit = false
 
 /*---------------CREATE 10x10 BOARD---------------*/
 const attackBoard = document.querySelector("#attackBoard")
@@ -71,16 +75,16 @@ function createAttackBoard() {
     div.addEventListener("click", clickedEnemyBoard)
 
     //ASSING ID'S BY ROW
-    if (i > 11 && i < 22) div.setAttribute("id", `enemy-A${i % 11}`)
-    if (i > 22 && i < 33) div.setAttribute("id", `enemy-B${i % 11}`)
-    if (i > 33 && i < 44) div.setAttribute("id", `enemy-C${i % 11}`)
-    if (i > 44 && i < 55) div.setAttribute("id", `enemy-D${i % 11}`)
-    if (i > 55 && i < 66) div.setAttribute("id", `enemy-E${i % 11}`)
-    if (i > 66 && i < 77) div.setAttribute("id", `enemy-F${i % 11}`)
-    if (i > 77 && i < 88) div.setAttribute("id", `enemy-G${i % 11}`)
-    if (i > 88 && i < 99) div.setAttribute("id", `enemy-H${i % 11}`)
-    if (i > 99 && i < 110) div.setAttribute("id", `enemy-I${i % 11}`)
-    if (i > 110 && i < 122) div.setAttribute("id", `enemy-J${i % 11}`)
+    if (i > 11 && i < 22) div.setAttribute("id", `A${i % 11}`)
+    if (i > 22 && i < 33) div.setAttribute("id", `B${i % 11}`)
+    if (i > 33 && i < 44) div.setAttribute("id", `C${i % 11}`)
+    if (i > 44 && i < 55) div.setAttribute("id", `D${i % 11}`)
+    if (i > 55 && i < 66) div.setAttribute("id", `E${i % 11}`)
+    if (i > 66 && i < 77) div.setAttribute("id", `F${i % 11}`)
+    if (i > 77 && i < 88) div.setAttribute("id", `G${i % 11}`)
+    if (i > 88 && i < 99) div.setAttribute("id", `H${i % 11}`)
+    if (i > 99 && i < 110) div.setAttribute("id", `I${i % 11}`)
+    if (i > 110 && i < 122) div.setAttribute("id", `J${i % 11}`)
 
     //ADD LETTERS
     if (i % 11 == 0 && i != 0) {
@@ -166,22 +170,47 @@ function createButtonListeners() {
 function clickedEnemyBoard(e) {
   if (readyToPlay == true) {
     const cell = document.querySelector(`#${e.target.id}`)
-    userGuesses[e.target.id] = true
-    if (enemyPositions[e.target.id] && !userHits[e.target.id]) {
-      userHits[e.target.id] = true
-      cell.style.backgroundColor = "crimson"
-      cell.removeEventListener("click", clickedEnemyBoard)
-      winCheck = Object.keys(userHits)
-    } else {
-      cell.style.backgroundColor = "rgba(84, 58, 183, 1)"
-      cell.removeEventListener("click", clickedEnemyBoard)
+    if (userGuesses[e.target.id] != true) {
+      userGuesses[e.target.id] = true
+      cell.style.backgroundColor = "grey"
+      if (enemyPositions[e.target.id] == true) {
+        userHits[e.target.id] = true
+        cell.style.backgroundColor = "crimson"
+      }
+      AiTurn()
     }
-    if (winCheck.length == 19) return userWon()
+
+    userCheck = Object.keys(userHits)
+    enemyCheck = Object.keys(enemyHits)
+    if (userCheck.length == 19) {
+      readyToPlay = false
+      userWon('User')
+    } else if (enemyCheck.length == 19) {
+      readyToPlay = false
+      userWon('Enemy')
+    }
   }
 }
 
-function userWon() {
-  console.log("YOU WON")
+function AiTurn() {
+  while (true) {
+    const randomLeft = leftSide[Math.floor(Math.random() * 10)]
+    const randomTop = topSide[Math.floor(Math.random() * 10)]
+    const cell = document.querySelector(`#user-${randomLeft}${randomTop}`)
+    if (enemyGuesses[`${randomLeft}${randomTop}`] != true) {
+      enemyGuesses[`${randomLeft}${randomTop}`] = true
+      cell.style.backgroundColor = "grey"
+      if (userPositions[`${randomLeft}${randomTop}`] == true) {
+        enemyHits[`${randomLeft}${randomTop}`] = true
+        cell.style.backgroundColor = "crimson"
+      } 
+      break
+    }
+  }
+}
+
+function userWon(player) {
+  console.log(`${player} won!`)
 }
 
 /*---------------SHOW HEALTH---------------*/
@@ -227,29 +256,36 @@ function buttonClicked(e) {
     }
   }
   
+  const clearPosition = Object.keys(userPositions)
   if (e.target.id == "start-game") {
-    const clearPositions = Object.keys(userPositions)
-    if (clearPositions.length === 19) {
-
-      console.log('Ready to start game')
+    if (clearPosition.length === 19) {
       readyToPlay = true
+      startGame()
+      console.log(readyToPlay)
     } else {
       console.log('Please set all your ships')
     }
   }
 
-  if (readyToPlay) {
-    
+  if (clearPosition.length === 19) {
+    startGameBtn.style.backgroundColor = "black"
+  } else if (clearPosition.length < 19) {
+    startGameBtn.style.backgroundColor = "grey"
   }
 }
 
 function clearPositions(index) {
-  const clearPositions = Object.keys(userPositions)
-  for (let i = index; i < clearPositions.length; i++) {
-    delete userPositions[clearPositions[i]]
-    const cell = document.querySelector(`#user-${clearPositions[i]}`)
+  const clearPosition = Object.keys(userPositions)
+  for (let i = index; i < clearPosition.length; i++) {
+    delete userPositions[clearPosition[i]]
+    const cell = document.querySelector(`#user-${clearPosition[i]}`)
     cell.style.backgroundColor = 'transparent'
+    cell.style.border = '1px solid black'
   }
+}
+
+function startGame() {
+  
 }
 
 
@@ -259,11 +295,11 @@ createPlayerBoard()
 createButtonListeners()
 
 /*---------------CALL TO PLACE ENEMIES---------------*/
-checkPosition(enemyBattleShip, battleShipColor, enemyPositions, "enemy-")
-checkPosition(enemyCarrier, carrierColor, enemyPositions, "enemy-")
-checkPosition(enemyCruiser, cruiserColor, enemyPositions, "enemy-")
-checkPosition(enemyDestroyer, destroyerColor, enemyPositions, "enemy-")
-checkPosition(enemySubmarine, submarineColor, enemyPositions, "enemy-")
+checkPosition(enemyBattleShip, battleShipColor, enemyPositions, "")
+checkPosition(enemyCarrier, carrierColor, enemyPositions, "")
+checkPosition(enemyCruiser, cruiserColor, enemyPositions, "")
+checkPosition(enemyDestroyer, destroyerColor, enemyPositions, "")
+checkPosition(enemySubmarine, submarineColor, enemyPositions, "")
 
 /*---------------CHECK POSITION---------------*/
 function checkPosition(ship, color, position, side) {
@@ -289,6 +325,7 @@ function assignPosition(shipPosition, color, position, side) {
     if (position !== enemyPositions) {
       const cell = document.querySelector(`#${side}${shipPosition[i]}`)
       cell.style.backgroundColor = color
+      cell.style.border = '1px dotted blue'
     }
   }
 }
