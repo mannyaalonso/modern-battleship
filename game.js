@@ -59,6 +59,7 @@ const order = [
   "mySubmarine",
 ]
 let enemyTrack = []
+let userTrack = []
 
 /*---------------CREATE 10x10 BOARD---------------*/
 const attackBoard = document.querySelector("#attackBoard")
@@ -217,29 +218,136 @@ function checkEnemyShipHit(id, track) {
       if (i < 4) {
         //Battleship
         enemyBattleShip.health -= 1
-        updateHealth(enemyBattleShip.name, enemyBattleShip.health)
+        updateEnemyHealth(enemyBattleShip.name, enemyBattleShip.health)
       } else if (i > 3 && i < 9) {
         //Carrier
         enemyCarrier.health -= 1
-        updateHealth(enemyCarrier.name, enemyCarrier.health)
+        updateEnemyHealth(enemyCarrier.name, enemyCarrier.health)
       } else if (i > 8 && i < 11) {
         //Cruiser
         enemyCruiser.health -= 1
-        updateHealth(enemyCruiser.name, enemyCruiser.health)
+        updateEnemyHealth(enemyCruiser.name, enemyCruiser.health)
       } else if (i > 10 && i < 16) {
         //Destroyer
         enemyDestroyer.health -= 1
-        updateHealth(enemyDestroyer.name, enemyDestroyer.health)
+        updateEnemyHealth(enemyDestroyer.name, enemyDestroyer.health)
       } else if (i > 15) {
         //Submarine
         enemySubmarine.health -= 1
-        updateHealth(enemySubmarine.name, enemySubmarine.health)
+        updateEnemyHealth(enemySubmarine.name, enemySubmarine.health)
       }
     }
   }
 }
 
-function updateHealth(name, health) {
+function checkUserShipHit(id, track) {
+  for (let i = 0; i < track.length; i++) {
+    if (track[i] == id) {
+      if (i < 4) {
+        //Battleship
+        myBattleShip.health -= 1
+        updateUserHealth(myBattleShip.name, myBattleShip.health)
+      } else if (i > 3 && i < 9) {
+        //Carrier
+        myCarrier.health -= 1
+        updateUserHealth(myCarrier.name, myCarrier.health)
+      } else if (i > 8 && i < 11) {
+        //Cruiser
+        myCruiser.health -= 1
+        updateUserHealth(myCruiser.name, myCruiser.health)
+      } else if (i > 10 && i < 16) {
+        //Destroyer
+        myDestroyer.health -= 1
+        updateUserHealth(enemyDestroyer.name, myDestroyer.health)
+      } else if (i > 15) {
+        //Submarine
+        mySubmarine.health -= 1
+        updateUserHealth(mySubmarine.name, mySubmarine.health)
+      }
+    }
+  }
+}
+
+function updateUserHealth(name, health) {
+  if (name === "Battleship") {
+    if (health === 3) {
+      healths[5].style.backgroundImage =
+        "linear-gradient(to right, orange 20%, rgba(0,0,0,0) 20%)"
+    } else if (health === 2) {
+      healths[5].style.backgroundImage =
+        "linear-gradient(to right, orange 50%, rgba(0,0,0,0) 50%)"
+    } else if (health === 1) {
+      healths[5].style.backgroundImage =
+        "linear-gradient(to right, orangered 70%, rgba(0,0,0,0) 70%)"
+    } else if (health === 0) {
+      healths[5].style.backgroundImage =
+        "linear-gradient(to right, crimson 100%, rgba(0,0,0,0) 100%)"
+    }
+  }
+
+  if (name === "Carrier") {
+    if (health === 4) {
+      healths[6].style.backgroundImage =
+        "linear-gradient(to right, orange 20%, rgba(0,0,0,0) 20%)"
+    } else if (health === 3) {
+      healths[6].style.backgroundImage =
+        "linear-gradient(to right, orange 50%, rgba(0,0,0,0) 50%)"
+    } else if (health === 2) {
+      healths[6].style.backgroundImage =
+        "linear-gradient(to right, orange 60%, rgba(0,0,0,0) 60%)"
+    } else if (health === 1) {
+      healths[6].style.backgroundImage =
+        "linear-gradient(to right, orangered 80%, rgba(0,0,0,0) 80%)"
+    } else if (health === 0) {
+      healths[6].style.backgroundImage =
+        "linear-gradient(to right, crimson 100%, rgba(0,0,0,0) 100%)"
+    }
+  }
+
+  if (name === "Cruiser") {
+    if (health === 1) {
+      healths[7].style.backgroundImage =
+        "linear-gradient(to right, orangered 50%, rgba(0,0,0,0) 50%)"
+    } else if (health === 0) {
+      healths[7].style.backgroundImage =
+        "linear-gradient(to right, crimson 100%, rgba(0,0,0,0) 100%)"
+    }
+  }
+
+  if (name === "Destroyer") {
+    if (health === 4) {
+      healths[8].style.backgroundImage =
+        "linear-gradient(to right, orange 20%, rgba(0,0,0,0) 20%)"
+    } else if (health === 3) {
+      healths[8].style.backgroundImage =
+        "linear-gradient(to right, orange 50%, rgba(0,0,0,0) 50%)"
+    } else if (health === 2) {
+      healths[8].style.backgroundImage =
+        "linear-gradient(to right, orange 60%, rgba(0,0,0,0) 60%)"
+    } else if (health === 1) {
+      healths[8].style.backgroundImage =
+        "linear-gradient(to right, orangered 80%, rgba(0,0,0,0) 80%)"
+    } else if (health === 0) {
+      healths[8].style.backgroundImage =
+        "linear-gradient(to right, crimson 100%, rgba(0,0,0,0) 100%)"
+    }
+  }
+
+  if (name === "Submarine") {
+    if (health === 2) {
+      healths[9].style.backgroundImage =
+        "linear-gradient(to right, orange 60%, rgba(0,0,0,0) 60%)"
+    } else if (health === 1) {
+      healths[9].style.backgroundImage =
+        "linear-gradient(to right, orangered 80%, rgba(0,0,0,0) 80%)"
+    } else if (health === 0) {
+      healths[9].style.backgroundImage =
+        "linear-gradient(to right, crimson 100%, rgba(0,0,0,0) 100%)"
+    }
+  }
+}
+
+function updateEnemyHealth(name, health) {
   if (name === 'Battleship') {
     if (health === 3) {
       healths[0].style.backgroundImage =
@@ -328,6 +436,7 @@ function AiTurn() {
       enemyGuesses[`${randomLeft}${randomTop}`] = true
       cell.style.backgroundColor = "grey"
       if (userPositions[`${randomLeft}${randomTop}`] == true) {
+        checkUserShipHit(`${randomLeft}${randomTop}`, userTrack)
         enemyHits[`${randomLeft}${randomTop}`] = true
         cell.style.backgroundColor = "crimson"
       }
@@ -359,6 +468,14 @@ function buttonClicked(e) {
       checkPosition(myCruiser, cruiserColor, userPositions, "user-")
       checkPosition(myDestroyer, destroyerColor, userPositions, "user-")
       checkPosition(mySubmarine, submarineColor, userPositions, "user-")
+
+      /*---------------TRACK USER POSITIONS---------------*/
+      const myBS = myBattleShip.position
+      const myCA = myCarrier.position
+      const myCR = myCruiser.position
+      const myDE = myDestroyer.position
+      const mySU = mySubmarine.position
+      userTrack = myBS.concat(myCA.concat(myCR.concat(myDE.concat(mySU))))
     }
 
     /*---------------CLEAR POSITIONS---------------*/
@@ -449,7 +566,7 @@ checkPosition(enemyCruiser, cruiserColor, enemyPositions, "")
 checkPosition(enemyDestroyer, destroyerColor, enemyPositions, "")
 checkPosition(enemySubmarine, submarineColor, enemyPositions, "")
 
-/*---------------TRACK ENEMYS POSITIONS---------------*/
+/*---------------TRACK ENEMY POSITIONS---------------*/
 const enemyBS = enemyBattleShip.position
 const enemyCA = enemyCarrier.position
 const enemyCR = enemyCruiser.position
