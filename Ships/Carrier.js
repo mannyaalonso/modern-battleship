@@ -9,11 +9,14 @@ export class Carrier {
     this.health -= 1
   }
 
+  restoreHealth() {
+    this.health = 5
+  }
+
   place(letters, numbers) {
     const direction = Math.floor(Math.random() * 2)
     if (direction === 0) return (this.position = placeVertically(letters))
-    if (direction === 1)
-      return (this.position = placeHorizontally(letters, numbers))
+    if (direction === 1) return (this.position = placeHorizontally(letters, numbers))
   }
 }
 

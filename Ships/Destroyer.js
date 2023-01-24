@@ -2,10 +2,15 @@ export class Destroyer {
   constructor() {
     this.name = "Destroyer"
     this.health = 5
+    this.position
   }
 
   hit() {
     this.health -= 1
+  }
+  
+  restoreHealth() {
+    this.health = 5
   }
 
   place(letters, numbers) {

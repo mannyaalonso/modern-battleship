@@ -2,10 +2,15 @@ export class BattleShip {
   constructor() {
     this.name = "Battleship"
     this.health = 4
+    this.position
   }
 
   hit() {
     this.health -= 1
+  }
+
+  restoreHealth() {
+    this.health = 4
   }
 
   place(letters, numbers) {
