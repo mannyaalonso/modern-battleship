@@ -200,6 +200,7 @@ function clickedEnemyBoard(e) {
       AiTurn()
     }
 
+    /*---------------CHECK WIN---------------*/
     userCheck = Object.keys(userHits)
     enemyCheck = Object.keys(enemyHits)
     if (userCheck.length == 19) {
@@ -212,6 +213,7 @@ function clickedEnemyBoard(e) {
   }
 }
 
+/*---------------CHECK ENEMY HEALTH---------------*/
 function checkEnemyShipHit(id, track) {
   for (let i = 0; i < track.length; i++) {
     if (track[i] == id) {
@@ -240,6 +242,7 @@ function checkEnemyShipHit(id, track) {
   }
 }
 
+/*---------------CHECK USER HIT---------------*/
 function checkUserShipHit(id, track) {
   for (let i = 0; i < track.length; i++) {
     if (track[i] == id) {
@@ -268,6 +271,7 @@ function checkUserShipHit(id, track) {
   }
 }
 
+/*---------------UPDATE USER HEALTH---------------*/
 function updateUserHealth(name, health) {
   if (name === "Battleship") {
     if (health === 3) {
@@ -347,6 +351,7 @@ function updateUserHealth(name, health) {
   }
 }
 
+/*---------------UPDATE ENEMY HEALTH---------------*/
 function updateEnemyHealth(name, health) {
   if (name === 'Battleship') {
     if (health === 3) {
