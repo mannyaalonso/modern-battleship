@@ -152,7 +152,7 @@ function createButtonListeners() {
   btns.forEach((btn) => btn.addEventListener("click", buttonClicked))
 }
 
-/*---------------CLICK TARGET---------------*/
+/*---------------CLICK ENEMY---------------*/
 function clickedEnemyBoard(e) {
   if (readyToPlay == true) {
     const cell = document.querySelector(`#${e.target.id}`)
@@ -265,10 +265,10 @@ function buttonClicked(e) {
 
 /*---------------CLEAR USER POSITIONS---------------*/
 function clearPositions(index) {
-  const clearPosition = Object.keys(userPositions)
-  for (let i = index; i < clearPosition.length; i++) {
-    delete userPositions[clearPosition[i]]
-    const cell = document.querySelector(`#user-${clearPosition[i]}`)
+  const userPositionsArr = Object.keys(userPositions)
+  for (let i = index; i < userPositionsArr.length; i++) {
+    delete userPositions[userPositionsArr[i]]
+    const cell = document.querySelector(`#user-${userPositionsArr[i]}`)
     cell.style.backgroundColor = "transparent"
     cell.style.border = "1px solid black"
   }
