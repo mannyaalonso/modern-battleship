@@ -111,7 +111,15 @@ body {
   display: none;
 }
 
+#randomize {
+  color: black;
+  background-color: white;
+}
 
+#randomize:hover {
+  background-color: crimson;
+  color: white;
+}
 
 span {
   font-weight: 1000;
