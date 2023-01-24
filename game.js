@@ -19,16 +19,11 @@ const enemyDestroyer = new Destroyer()
 const enemySubmarine = new Submarine()
 
 /*---------------USER BUTTONS---------------*/
-const buttons = document.querySelector(".user-buttons")
-const myBattleShipBtn = document.createElement("button")
-const myCarrierBtn = document.createElement("button")
-const myCruiserBtn = document.createElement("button")
-const myDestoryerBtn = document.createElement("button")
-const mySubmarineBtn = document.createElement("button")
+const btns = document.querySelectorAll(".user-btns")
 const startGameBtn = document.querySelector("#start-game")
 const randomizeBtn = document.querySelector("#randomize")
 
-/*---------------USER TEXTS---------------*/
+/*---------------USER TEXT---------------*/
 const dashTitle = document.getElementById("dash-title")
 const dashText = document.getElementById("dash-text")
 
@@ -38,13 +33,6 @@ const carrierColor = "#03396c"
 const cruiserColor = "#005b96"
 const destroyerColor = "#6497b1"
 const submarineColor = "#b3cde0"
-
-/*---------------BUTTON COLORS---------------*/
-myBattleShipBtn.style.backgroundColor = battleShipColor
-myCarrierBtn.style.backgroundColor = carrierColor
-myCruiserBtn.style.backgroundColor = cruiserColor
-myDestoryerBtn.style.backgroundColor = destroyerColor
-mySubmarineBtn.style.backgroundColor = submarineColor
 
 /*---------------GAME VARIABLES---------------*/
 let enemyPositions = {}
@@ -70,7 +58,6 @@ let topCounter = 0
 createAttackBoard()
 createPlayerBoard()
 createButtonListeners()
-startGameBtn.style.display = "none"
 
 /*---------------ATTACK BOARD---------------*/
 function createAttackBoard() {
@@ -162,7 +149,6 @@ function createPlayerBoard() {
 
 /*---------------CREATE BUTTON LISTENERS---------------*/
 function createButtonListeners() {
-  const btns = document.querySelectorAll(".user-btns")
   btns.forEach((btn) => btn.addEventListener("click", buttonClicked))
 }
 
@@ -247,7 +233,7 @@ function buttonClicked(e) {
     /*---------------UPDATE BUTTONS---------------*/
     if (userPositionsArr.length === 19) {
       startGameBtn.style.display = "inline"
-      dashText.innerText = "Click Start Game to begin!"
+      dashText.innerHTML = "Click <span>Start Game</span> to begin!"
     } else if (userPositionsArr.length < 19) {
       startGameBtn.style.backgroundColor = "grey"
     }
@@ -269,9 +255,8 @@ function buttonClicked(e) {
     attackBoard.replaceChildren()
     createAttackBoard()
     createPlayerBoard()
-    dashTitle.innerText = `Weclome`
-    dashText.innerHTML =
-      "Click on <span>each button</span> below <span>'Your Board'</span> to place each ship. ->"
+    dashTitle.innerText = `Welcome`
+    dashText.innerHTML = "Click on <span>Randomize</span> to place each ship."
     startGameBtn.innerText = "Start Game"
     startGameBtn.style.display = "none"
     randomizeBtn.style.display = "inline"

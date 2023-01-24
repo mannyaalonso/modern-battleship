@@ -108,6 +108,7 @@ body {
 
 #start-game {
   background-color: black;
+  display: none;
 }
 
 
