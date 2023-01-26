@@ -169,6 +169,7 @@ function createButtonListeners() {
   healths.forEach((health) => health.addEventListener("mouseout", hideHealth))
 }
 
+/*---------------SHOW HEALTH---------------*/
 function showHealth(e) {
   for (let i = 0; i < 10; i++) {
     if (e.target.id === `btn-${i}`) {
@@ -177,6 +178,7 @@ function showHealth(e) {
   }
 }
 
+/*---------------HIDE HEALTH---------------*/
 function hideHealth(e) {
   for (let i = 0; i < 10; i++) {
     if (e.target.id === `btn-${i}`) {
@@ -526,6 +528,7 @@ function buttonClicked(e) {
   }
 }
 
+/*---------------RESTORE HEALTH---------------*/
 function restoreHealth() {
   enemyBattleShip.restoreHealth()
   enemyCarrier.restoreHealth()
