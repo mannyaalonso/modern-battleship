@@ -5,159 +5,446 @@ body {
 }
 
 .parent-container {
-  margin-top: 500px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  overflow: scroll;
+    margin-top: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow: scroll;
+  }
+
+  .container {
+    height: 100%;
+    width: 50%;
+    min-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .dash {
+    height: 520px;
+    min-width: 350px;
+    color: white;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background: linear-gradient(60deg, #011f4b 0%, #b3cde0 100%);
+  }
+  #dash-title {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+  }
+
+  #dash-text {
+    color: white;
+    margin: 20px 20px;
+  }
+
+  .board {
+    margin: 20px 20px;
+    max-height: 520px;
+    max-width: 520px;
+    min-height: 520px;
+    min-width: 520px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+
+  .health {
+    width: 520px;
+    margin-bottom: 30px;
+  }
+
+  .healthToggle {
+    padding: 10px;
+    width: 80px;
+    border: 1px solid white;
+    color: white;
+    background-color: green;
+    border-radius: 30px;
+  }
+
+  .cells {
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    margin: 1px 1px;
+    border: 1px solid black;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+
+  .enemy:hover {
+    background-color: #011f4b;
+    color: white;
+  }
+
+  .user-btns {
+    width: 90px;
+    height: 30px;
+    border: none;
+    color: white;
+    margin: 0px 2px 50px 2px;
+    border-radius: 5px;
+  }
+
+  .user-btns:hover {
+    background-color: crimson;
+    color: white;
+  }
+
+  #start-game:hover {
+    background-color: crimson;
+    color: white;
+  }
+
+  .board-titles {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+
+  #start-game {
+    background-color: black;
+    display: none;
+  }
+
+  #randomize {
+    color: black;
+    background-color: white;
+  }
+
+  #randomize:hover {
+    background-color: crimson;
+    color: white;
+  }
+
+  span {
+    font-weight: 1000;
+  }
+
+  .home-page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .p-text {
+    color: white;
+  }
+
+  .h-text {
+    margin-top: 80px;
+  }
+
+  .p-text:hover {
+    text-decoration: underline;
+  }
+
+
+@media only screen and (min-width: 300px) {
+  .parent-container {
+    margin-top: 1150px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container {
+    min-width: 375px;
+  }
+
+  .dash {
+    height: 300px;
+    min-width: 350px;
+  }
+
+  .board {
+    max-height: 375px;
+    max-width: 375px;
+    min-height: 375px;
+    min-width: 375px;
+  }
+
+  .health {
+    width: 375px;
+    margin-bottom: 30px;
+  }
+
+  .healthToggle {
+    width: 60px;
+    font-size: .5rem;
+    text-align: center;
+  }
+
+  .cells {
+    min-width: 30px;
+    min-height: 30px;
+    max-width: 30px;
+    max-height: 30px;
+  }
 }
 
-.container {
-  height: 100%;
-  width: 50%;
-  min-width: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+@media only screen and (min-width: 768px) {
+  .parent-container {
+    margin-top: 1300px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container {
+    min-width: 500px;
+  }
+
+  .dash {
+    height: 300px;
+    min-width: 350px;
+  }
+
+  .board {
+    max-height: 500px;
+    max-width: 500px;
+    min-height: 500px;
+    min-width: 500px;
+  }
+
+  .health {
+    width: 500px;
+    margin-bottom: 30px;
+  }
+
+  .healthToggle {
+    width: 80px;
+    font-size: .5rem;
+    text-align: center;
+  }
+
+  .cells {
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+  }
 }
 
-.dash {
-  height: 520px;
-  min-width: 350px;
-  color: white;
-  margin: 0 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  background: linear-gradient(60deg, #011f4b 0%, #b3cde0 100%);
-}
-#dash-title {
-  font-family: "Lato", sans-serif;
-  font-weight: 300;
-  font-size: 30px;
+@media only screen and (min-width: 1024px) {
+  .parent-container {
+    margin-top: 300px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .container {
+    min-width: 375px;
+    max-width: 375px;
+  }
+
+  .dash {
+    height: 300px;
+    min-width: 250px;
+  }
+
+  .board {
+    min-height: 500px;
+    min-width: 500px;
+    min-height: 275px;
+    min-width: 275px;
+  }
+
+  .health {
+    width: 375px;
+    margin-bottom: 30px;
+  }
+
+  .healthToggle {
+    width: 60px;
+    font-size: .5rem;
+    text-align: center;
+  }
+
+  .cells {
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+  }
 }
 
-#dash-text {
-  color: white;
-  margin: 20px 20px;
+@media only screen and (min-width: 1200px) {
+  .parent-container {
+    margin-top: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow: scroll;
+  }
+
+  .container {
+    height: 100%;
+    width: 50%;
+    min-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .dash {
+    height: 520px;
+    min-width: 350px;
+    color: white;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    background: linear-gradient(60deg, #011f4b 0%, #b3cde0 100%);
+  }
+  #dash-title {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-size: 30px;
+  }
+
+  #dash-text {
+    color: white;
+    margin: 20px 20px;
+  }
+
+  .board {
+    margin: 20px 20px;
+    max-height: 520px;
+    max-width: 520px;
+    min-height: 520px;
+    min-width: 520px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+
+  .health {
+    width: 520px;
+    margin-bottom: 30px;
+  }
+
+  .healthToggle {
+    padding: 10px;
+    width: 80px;
+    border: 1px solid white;
+    color: white;
+    background-color: green;
+    border-radius: 30px;
+  }
+
+  .cells {
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    margin: 1px 1px;
+    border: 1px solid black;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+
+  .enemy:hover {
+    background-color: #011f4b;
+    color: white;
+  }
+
+  .user-btns {
+    width: 90px;
+    height: 30px;
+    border: none;
+    color: white;
+    margin: 0px 2px 50px 2px;
+    border-radius: 5px;
+  }
+
+  .user-btns:hover {
+    background-color: crimson;
+    color: white;
+  }
+
+  #start-game:hover {
+    background-color: crimson;
+    color: white;
+  }
+
+  .board-titles {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+
+  #start-game {
+    background-color: black;
+    display: none;
+  }
+
+  #randomize {
+    color: black;
+    background-color: white;
+  }
+
+  #randomize:hover {
+    background-color: crimson;
+    color: white;
+  }
+
+  span {
+    font-weight: 1000;
+  }
+
+  .home-page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .p-text {
+    color: white;
+  }
+
+  .h-text {
+    margin-top: 80px;
+  }
+
+  .p-text:hover {
+    text-decoration: underline;
+  }
+
 }
 
-.board {
-  margin: 20px 20px;
-  max-height: 520px;
-  max-width: 520px;
-  min-height: 520px;
-  min-width: 520px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  color: black;
-}
-
-.health {
-  width: 520px;
-  margin-bottom: 30px;
-}
-
-.healthToggle {
-  padding: 10px;
-  width: 80px;
-  border: 1px solid white;
-  color: white;
-  background-color: green; 
-  border-radius: 30px;
-}
-
-.cells {
-  min-width: 40px;
-  min-height: 40px;
-  max-width: 40px;
-  max-height: 40px;
-  margin: 1px 1px;
-  border: 1px solid black;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  color: black;
-}
-
-.enemy:hover {
-  background-color: #011f4b;
-  color: white;
-}
-
-.user-btns {
-  width: 90px;
-  height: 30px;
-  border: none;
-  color: white;
-  margin: 0px 2px 50px 2px;
-  border-radius: 5px;
-}
-
-.user-btns:hover {
-  background-color: crimson;
-  color: white;
-}
-
-#start-game:hover {
-  background-color: crimson;
-  color: white;
-}
-
-.board-titles {
-  font-family: "Lato", sans-serif;
-  font-weight: 300;
-  font-size: 20px;
-  margin-bottom: 0;
-}
-
-#start-game {
-  background-color: black;
-  display: none;
-}
-
-#randomize {
-  color: black;
-  background-color: white;
-}
-
-#randomize:hover {
-  background-color: crimson;
-  color: white;
-}
-
-span {
-  font-weight: 1000;
-}
-
-.home-page {
-  display: flex;
-  flex-direction: column;
-}
-
-a {
-  text-decoration: none;
-}
-
-.p-text {
-  color: white;
-}
-
-.h-text {
-  margin-top: 80px;
-}
-
-.p-text:hover {
-  text-decoration: underline;
-}
 
 /*
 Waves from:
