@@ -1,4 +1,5 @@
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
+
 body {
   margin: 0;
   height: 100vh;
@@ -73,6 +74,7 @@ body {
     color: white;
     background-color: green;
     border-radius: 30px;
+    
   }
 
   .cells {
@@ -351,7 +353,8 @@ body {
   }
 
   .healthToggle {
-    padding: 10px;
+    font-size: 1.5rem;
+    padding: 5px;
     width: 80px;
     border: 1px solid white;
     color: white;
@@ -372,78 +375,6 @@ body {
     align-items: center;
     color: black;
   }
-
-  .enemy:hover {
-    background-color: #011f4b;
-    color: white;
-  }
-
-  .user-btns {
-    width: 90px;
-    height: 30px;
-    border: none;
-    color: white;
-    margin: 0px 2px 50px 2px;
-    border-radius: 5px;
-  }
-
-  .user-btns:hover {
-    background-color: crimson;
-    color: white;
-  }
-
-  #start-game:hover {
-    background-color: crimson;
-    color: white;
-  }
-
-  .board-titles {
-    font-family: "Lato", sans-serif;
-    font-weight: 300;
-    font-size: 20px;
-    margin-bottom: 0;
-  }
-
-  #start-game {
-    background-color: black;
-    display: none;
-  }
-
-  #randomize {
-    color: black;
-    background-color: white;
-  }
-
-  #randomize:hover {
-    background-color: crimson;
-    color: white;
-  }
-
-  span {
-    font-weight: 1000;
-  }
-
-  .home-page {
-    display: flex;
-    flex-direction: column;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  .p-text {
-    color: white;
-  }
-
-  .h-text {
-    margin-top: 80px;
-  }
-
-  .p-text:hover {
-    text-decoration: underline;
-  }
-
 }
 
 

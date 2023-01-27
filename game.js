@@ -73,6 +73,7 @@ let topCounter = 0
 createAttackBoard()
 createPlayerBoard()
 createButtonListeners()
+placeAndTrackEnemies()
 
 /*---------------ATTACK BOARD---------------*/
 function createAttackBoard() {
@@ -520,6 +521,7 @@ function buttonClicked(e) {
     createAttackBoard()
     createPlayerBoard()
     restoreHealth()
+    placeAndTrackEnemies()
     dashTitle.innerText = `Welcome`
     dashText.innerHTML = "Click on <span>Randomize</span> to place each ship."
     startGameBtn.innerText = "Start Game"
@@ -568,19 +570,24 @@ function startGame() {
 }
 
 /*---------------CALL TO PLACE ENEMIES---------------*/
-checkPosition(enemyBattleShip, battleShipColor, enemyPositions, "")
-checkPosition(enemyCarrier, carrierColor, enemyPositions, "")
-checkPosition(enemyCruiser, cruiserColor, enemyPositions, "")
-checkPosition(enemyDestroyer, destroyerColor, enemyPositions, "")
-checkPosition(enemySubmarine, submarineColor, enemyPositions, "")
+function placeAndTrackEnemies() {
+  checkPosition(enemyBattleShip, battleShipColor, enemyPositions, "")
+  checkPosition(enemyCarrier, carrierColor, enemyPositions, "")
+  checkPosition(enemyCruiser, cruiserColor, enemyPositions, "")
+  checkPosition(enemyDestroyer, destroyerColor, enemyPositions, "")
+  checkPosition(enemySubmarine, submarineColor, enemyPositions, "")
 
-/*---------------TRACK ENEMY POSITIONS---------------*/
-const enemyBS = enemyBattleShip.position
-const enemyCA = enemyCarrier.position
-const enemyCR = enemyCruiser.position
-const enemyDE = enemyDestroyer.position
-const enemySU = enemySubmarine.position
-enemyTrack = enemyBS.concat(enemyCA.concat(enemyCR.concat(enemyDE.concat(enemySU))))
+  /*---------------TRACK ENEMY POSITIONS---------------*/
+  const enemyBS = enemyBattleShip.position
+  const enemyCA = enemyCarrier.position
+  const enemyCR = enemyCruiser.position
+  const enemyDE = enemyDestroyer.position
+  const enemySU = enemySubmarine.position
+  enemyTrack = enemyBS.concat(
+    enemyCA.concat(enemyCR.concat(enemyDE.concat(enemySU)))
+  )
+}
+
 
 /*---------------CHECK POSITION---------------*/
 function checkPosition(ship, color, position, side) {
