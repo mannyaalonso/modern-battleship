@@ -63,6 +63,7 @@ body {
   .health {
     width: 520px;
     margin-bottom: 30px;
+    text-align: center;
   }
 
   .healthToggle {
